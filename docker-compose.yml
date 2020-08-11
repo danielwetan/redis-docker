@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - nodejs_network
+  nodejs:
+    conatiner_name: nodejs
+    image: node:12-alpine
+    ports:
+     - 3000:3000
+    depends_on: 
+      - redis 
+    networks:
+      - nodejs_network
+
+networks:
+  nodejs_network:
+    name: nodejs_network
